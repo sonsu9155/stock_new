@@ -1,4 +1,4 @@
-@extends('layer.main')
+@extends('layouts.main')
 @section('title')
     财智通
 @endsection

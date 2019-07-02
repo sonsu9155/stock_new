@@ -13,14 +13,33 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->engine = 'InnoDB';
+            $table->increments('id');
+            $table->string('username');
             $table->string('password');
+            $table->string('name');
+            $table->string('idcard');
+            $table->string('kh_bank');
+            $table->string('bank_name');
+            $table->string('bank_card');
+            $table->string('phone');
+            $table->string('atmpwd');
+            $table->string('image_url');
+            $table->integer('status');
+            $table->integer('money_wallet_id')->unsigned();
+            $table->integer('stock_wallet_id')->unsigned();
+            $table->string('forgot_token', 100)->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('money_wallet_id')
+                ->references('id')->on('money_wallets')
+                ->onDelete('cascade');
+            $table->foreign('stock_wallet_id')
+                ->references('id')->on('stock_wallets')
+                ->onDelete('cascade');
         });
     }
 
@@ -31,6 +50,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        $table->dropForeign(['money_wallet_id' , 'stock_wallet_id']);
+        Schema::drop('users');
     }
 }

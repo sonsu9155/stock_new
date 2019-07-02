@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -39,5 +40,22 @@ class LoginController extends Controller
 
     public function index(){
         return view('login');
+    }
+
+    public function super() {
+        
+        if (!Auth::check()) {
+            return redirect('login');
+        } else {
+            if (Auth::user()->hasRole('superadministrator')) {
+                return redirect('dashboard');
+            } else if (Auth::user()->hasRole('pabrik_admin_timbangan')) {
+                return redirect('scales');
+            } else if (Auth::user()->hasRole('hotel_supervisor')) {
+                return redirect('general_report');
+            } else {
+                return redirect('shortcuts');
+            }
+        }
     }
 }

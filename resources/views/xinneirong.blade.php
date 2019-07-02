@@ -1,4 +1,4 @@
-@extends('layer.main')
+@extends('layouts.main')
 @section('css')
 	<style>
 		.m{ width: 740px; height: 400px; margin-left: auto; margin-right: auto; margin-top: 100px; }

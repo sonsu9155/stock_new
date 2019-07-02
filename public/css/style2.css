@@ -1,0 +1,29 @@
+
+
+.mybox th{
+	background:none;
+}
+
+.mybox{
+	background-color:#020202;
+}
+
+.mybox td{
+	font-size:12px;
+	height: 40px;
+	background-color: #c4ffff;
+	color: black;
+	border: 1px solid black;
+}
+.mybox th{
+	font-size:16px;
+	height: 40px;
+	background-color: #108d8d;
+	color: black;
+	border: 1px solid black;
+}
+
+body{
+	background-color:#ffffff;
+	color:rgb(255, 255, 255);
+}
