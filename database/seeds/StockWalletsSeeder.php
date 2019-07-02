@@ -17,7 +17,7 @@ class StockWalletsSeeder extends Seeder
         \DB::table('stock_wallets')->insert([
             [
                 'id'             => 1,
-                'before_amount'     => 0,
+                'before_amount'     => 10000,
                 'after_amount'     => 90000,
                 'created_at'     => \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at'     => \Carbon\Carbon::now()->toDateTimeString(),
@@ -25,7 +25,7 @@ class StockWalletsSeeder extends Seeder
             ],
             [
                 'id'             => 2,
-                'before_amount'     => 0,
+                'before_amount'     => 10000,
                 'after_amount'     => 90000,
                 'created_at'     => \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at'     => \Carbon\Carbon::now()->toDateTimeString(),
@@ -33,7 +33,7 @@ class StockWalletsSeeder extends Seeder
             ],
             [
                 'id'             => 3,
-                'before_amount'     => 0,
+                'before_amount'     => 10000,
                 'after_amount'     => 90000,
                 'created_at'     => \Carbon\Carbon::now()->toDateTimeString(),
                 'updated_at'     => \Carbon\Carbon::now()->toDateTimeString(),

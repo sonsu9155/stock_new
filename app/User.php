@@ -82,5 +82,13 @@ class User extends Authenticatable
     public function depositHistories() {
         return $this->hasMany('App\DepositHistory', 'user_id');
     }
+    
+    public function money_wallet(){
+        return $this->belongsTo('App\MoneyWallet','money_wallet_id');
+    }
+
+    public function stock_wallet(){
+        return $this->belongsTo('App\StockWallet', 'id', 'stock_wallet_id');
+    }
 
 }

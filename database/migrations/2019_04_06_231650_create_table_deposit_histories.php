@@ -19,7 +19,7 @@ class CreateTableDepositHistories extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->double('amount');
-            $table->integer('type');
+            $table->string('type');
             $table->string('status');
             $table->double('before_amount');
             $table->timestamps();

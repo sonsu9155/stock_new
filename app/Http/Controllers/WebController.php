@@ -42,7 +42,7 @@ class WebController extends Controller
         }  
       
         $new_latest = News::latest()->first();
-        return view('home.index.web.operate')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
+        return view('web.operate')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
         
     }
 
@@ -56,7 +56,7 @@ class WebController extends Controller
         $fund_amount = $funds->sum('money');           
         }  
         $new_latest = News::latest()->first();
-        return view('home.index.web.stock_detail')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
+        return view('web.stock_detail')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
         
     }
 
@@ -71,7 +71,7 @@ class WebController extends Controller
         if($funds){
             $fund_amount = $funds->sum('money');           
         }        
-        return view('home.index.web.atm')->with(compact('user','setting','money_wallet','stock_wallet', 'new_latest','fund_amount'));
+        return view('web.atm')->with(compact('user','setting','money_wallet','stock_wallet', 'new_latest','fund_amount'));
     }
     public function add_atm(){
         $user_id = Auth::user()->id;
@@ -93,7 +93,7 @@ class WebController extends Controller
                 'user_id' => $user_id,
                 'type' => '出金',
                 'money' => $_POST['money'],
-                'bankname' => $_POST['bankname']
+                'bank' => $_POST['bankname']
             ]);
             echo '<script> alert("成功.");</script>' ;
             echo "<script>location.href = '/web/atm'</script>";
@@ -113,7 +113,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.payment')->with(compact('user','money_wallet','stock_wallet', 'fund_amount','new_latest'));
+        return view('web.payment')->with(compact('user','money_wallet','stock_wallet', 'fund_amount','new_latest'));
      
     }
 
@@ -129,7 +129,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.payment_log')->with(compact('user','money_wallet','stock_wallet','deposite_histories', 'fund_amount','new_latest'));
+        return view('web.payment_log')->with(compact('user','money_wallet','stock_wallet','deposite_histories', 'fund_amount','new_latest'));
     }    
     public function atm_log(){
         $user_id= Auth::user()->id;
@@ -143,7 +143,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.atm_log')->with(compact('user','money_wallet','stock_wallet','withdraw_histories','fund_amount', 'new_latest'));
+        return view('web.atm_log')->with(compact('user','money_wallet','stock_wallet','withdraw_histories','fund_amount', 'new_latest'));
     }
     public function pay_page(){
         $user_id = Auth::user()->id;
@@ -155,7 +155,7 @@ class WebController extends Controller
             'user_id' => $user_id,
             'type' => '入金',
             'money' => $money,
-            'bankname' => ''
+            'bank' => 'our'
         ]);
         $funds = FundRequest::where('user_id',$user->id)
                             ->where('type','出金')->get();
@@ -163,7 +163,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.pay_page')->with(compact('user','money_wallet','stock_wallet','money','fund_amount', 'new_latest'));
+        return view('web.pay_page')->with(compact('user','money_wallet','stock_wallet','money','fund_amount', 'new_latest'));
     }
     // public function selforder(){
     //     return view('home.index.web.selforder');
@@ -181,7 +181,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.deal')->with(compact('user', 'setting', 'money_wallet', 'stock_wallet', 'sell_histories', 'buy_histories', 'fund_amount','new_latest'));
+        return view('web.deal')->with(compact('user', 'setting', 'money_wallet', 'stock_wallet', 'sell_histories', 'buy_histories', 'fund_amount','new_latest'));
     }
     public function atmpwd(){
         $user = Auth::user();
@@ -193,7 +193,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.atmpwd')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
+        return view('web.atmpwd')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
     }
     public function save_atmpwd(){
         $user = Auth::user();
@@ -219,7 +219,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.pwd')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
+        return view('web.pwd')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
     }
     public function rules(){
         $user = Auth::user();
@@ -231,7 +231,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.rules')->with(compact('user','money_wallet','stock_wallet', 'fund_amount','new_latest'));
+        return view('web.rules')->with(compact('user','money_wallet','stock_wallet', 'fund_amount','new_latest'));
      
     }
     public function news(){
@@ -245,7 +245,7 @@ class WebController extends Controller
         } 
         $news = News::get();
         $new_latest = News::latest()->first();
-        return view('home.index.web.news')->with(compact('user','money_wallet','stock_wallet','news', 'fund_amount','new_latest'));
+        return view('web.news')->with(compact('user','money_wallet','stock_wallet','news', 'fund_amount','new_latest'));
     
     }
     public function save_pwd(){
@@ -275,7 +275,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.trade_detail')->with(compact('user','money_wallet','stock_wallet','buy_histories', 'setting', 'fund_amount','new_latest'));
+        return view('web.trade_detail')->with(compact('user','money_wallet','stock_wallet','buy_histories', 'setting', 'fund_amount','new_latest'));
        
     }
     public function cancash(){
@@ -291,7 +291,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.cancash')->with(compact('user', 'setting', 'money_wallet', 'stock_wallet', 'buy_histories', 'sell_histories','fund_amount', 'new_latest'));
+        return view('web.cancash')->with(compact('user', 'setting', 'money_wallet', 'stock_wallet', 'buy_histories', 'sell_histories','fund_amount', 'new_latest'));
     }
     public function report_day(){
         //$day = $_GET['date'];
@@ -308,7 +308,7 @@ class WebController extends Controller
         } 
         $new_latest = News::latest()->first();
         //var_dump($sell_histories);exit();
-        return view('home.index.web.report_day')->with(compact('user', 'setting', 'money_wallet', 'stock_wallet', 'sell_histories', 'buy_histories','fund_amount', 'new_latest'));
+        return view('web.report_day')->with(compact('user', 'setting', 'money_wallet', 'stock_wallet', 'sell_histories', 'buy_histories','fund_amount', 'new_latest'));
     }
     public function report_week(){
         //$day = $_GET['date'];
@@ -357,7 +357,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.report_week')->with(compact('user','money_wallet', 'stock_wallet', 'start_day', 'data', 'fund_amount','new_latest'));
+        return view('web.report_week')->with(compact('user','money_wallet', 'stock_wallet', 'start_day', 'data', 'fund_amount','new_latest'));
     }
     public function user(){
         $user = Auth::user();
@@ -373,7 +373,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         } 
         $new_latest = News::latest()->first();
-        return view('home.index.web.user')->with(compact('user','money_wallet', 'stock_wallet','fund', 'setting', 'fund_amount','new_latest'));
+        return view('web.user')->with(compact('user','money_wallet', 'stock_wallet','fund', 'setting', 'fund_amount','new_latest'));
     }
     public function stockdata(Request $request){
         $type = $_GET['type'];

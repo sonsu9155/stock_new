@@ -76,7 +76,7 @@
         <td align="right" bgcolor="#3f4042" style="text-align: center;border: 1px solid black;">可买股票资金：</td>
         <td bgcolor="#3f4042" class="gray" style="text-align: center;border: 1px solid black;">
           <span class="money" style="float:center">
-          @if(($money_wallet->after_amount + $money_wallet->before_amount)>($stock_wallet->after_amount+$stock_wallet->before_amount))          
+          @if(($money_wallet->after_amount + $money_wallet->before_amount)>($stock_wallet->after_amount + $stock_wallet->before_amount))          
           ￥{{ number_format( $money_wallet->after_amount - $fund_amount, 2) }}
           @else
           ￥{{ number_format( $money_wallet->after_amount - 10*$fund_amount, 2) }}

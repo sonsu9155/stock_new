@@ -6,7 +6,7 @@
     <title>@yield('title')</title>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style3.css" rel="stylesheet" type="text/css" />
     <link href="/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/js/jquery1.3.2.js"></script>
     <script type="text/javascript" src="/js/ymPrompt.js"></script>
