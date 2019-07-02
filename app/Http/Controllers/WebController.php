@@ -84,7 +84,7 @@ class WebController extends Controller
             $fund_amount = $funds->sum('money');           
         }   
         if($_POST['money'] > $money_wallet->after_amount -$stock_wallet->after_amount -$fund_amount){
-            echo '<script> alert("不能退出。");</script>' ;
+            echo '<script> alert("不能出金。");</script>' ;
             echo "<script>location.href = '/web/atm'</script>";
         }
         $atmpwd = $_POST['atmpwd'];

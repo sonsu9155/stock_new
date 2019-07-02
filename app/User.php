@@ -88,7 +88,7 @@ class User extends Authenticatable
     }
 
     public function stock_wallet(){
-        return $this->belongsTo('App\StockWallet', 'id', 'stock_wallet_id');
+        return $this->belongsTo('App\StockWallet', 'stock_wallet_id');
     }
 
 }

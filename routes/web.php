@@ -60,6 +60,7 @@ Route::group(
         Route::get('moneywallets/edit', ['uses' => 'MoneyWalletsController@edit', 'middleware' => ['role:superadministrator']]);       
         Route::post('moneywallets/update', ['uses' => 'MoneyWalletsController@update', 'middleware' => ['role:superadministrator']]);
         Route::get('moneywallets/delete/{id}', ['uses' => 'MoneyWalletsController@delete', 'middleware' => ['role:superadministrator']]);
+        Route::get('moneywallets/detail', ['uses' => 'MoneyWalletsController@detail', 'middleware' => ['role:superadministrator']]);
 
         Route::get('withdrawhistory', ['uses' => 'WithdrawController@index', 'middleware' => ['role:superadministrator']]);
         Route::get('withdrawhistory/delete/{id}', ['uses' => 'WithdrawController@delete', 'middleware' => ['role:superadministrator']]);

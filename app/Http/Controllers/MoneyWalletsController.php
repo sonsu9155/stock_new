@@ -67,13 +67,21 @@ class MoneyWalletsController extends Controller
             //////////////////////////win or rose////////////////////
             if(($money_amount + $money_stock_amount)>($stock_give_amount+$stock_real_amount)){
                 $amount = $amount_org;
-                $res1 = MoneyWallet::where('id',$user->money_wallet_id)->update(['after_amount'=>$money_amount - $amount]);
-                $res2 = StockWallet::where('id',$user->stock_wallet_id)->update(['before_amount'=>$stock_real_amount -  $amount]);
+                if($amount_org>($money_amount-$stock_give_amount)){
+                    return redirect('/moneywallets/detail')->with('error','不能出金。退出太多了。');
+                }else{
+                    $res1 = MoneyWallet::where('id',$user->money_wallet_id)->update(['after_amount'=>$money_amount - $amount]);
+                    $res2 = StockWallet::where('id',$user->stock_wallet_id)->update(['before_amount'=>$stock_real_amount -  $amount]);
+                }
             }else{
                 $amount = $amount_org * 10;
-                $res1 = MoneyWallet::where('id',$user->money_wallet_id)->update(['after_amount'=>$money_amount - $amount]);
-                $res2 = StockWallet::where('id',$user->stock_wallet_id)->update(['before_amount'=>$stock_real_amount -  $amount_org]);
-                $res3 = StockWallet::where('id',$user->stock_wallet_id)->update(['before_amount'=>$stock_real_amount -  $amount_org * 9]);
+                if($amount_org>($money_amount-$stock_give_amount)){
+                    return redirect('/moneywallets/detail')->with('error','不能出金。退出太多了。');
+                }else{
+                    $res1 = MoneyWallet::where('id',$user->money_wallet_id)->update(['after_amount'=>$money_amount - $amount]);
+                    $res2 = StockWallet::where('id',$user->stock_wallet_id)->update(['before_amount'=>$stock_real_amount -  $amount_org]);
+                    $res3 = StockWallet::where('id',$user->stock_wallet_id)->update(['after_amount'=>$stock_give_amount -  $amount_org *  ($cost_exchange_rate-1)]);
+                }
             }
             //if($bill_type=="handling"){
                 

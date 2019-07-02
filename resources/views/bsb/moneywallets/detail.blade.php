@@ -36,9 +36,9 @@
                                     @if($user->money_wallet->after_amount >$user->stock_wallet->after_amount)
                                         ￥{{ number_format( $user->money_wallet->after_amount - $user->stock_wallet->after_amount , 2) }}
                                     @else
-                                        ￥0
+                                        ￥0    ,
                                     @endif
-                                    </td>                                    
+                                    </td> 
                                 </tr>                               
                             @endforeach
                             
