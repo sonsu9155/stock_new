@@ -105,6 +105,8 @@ Route::group(['middleware' => 'auth'], function(){
             Route::get('payment_log','WebController@payment_log');
             Route::post('pay_page','WebController@pay_page');
             Route::get('selforder','WebController@selforder');
+            Route::get('order','WebController@order');
+            Route::get('getstock','WebController@getstock');
             Route::get('user','WebController@user');
             Route::get('atm','WebController@atm');
             Route::post('add_atm','WebController@add_atm');

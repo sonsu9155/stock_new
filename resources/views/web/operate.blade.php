@@ -44,7 +44,7 @@
 		.mybox td{
 			font-size:18px;
 			height: 40px;
-			background-color: #c4ffff;
+			background-color: #3C5977;
 			color: black;
 		}
 		input[type="checkbox"] + label::before {

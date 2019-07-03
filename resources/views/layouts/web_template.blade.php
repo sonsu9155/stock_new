@@ -53,7 +53,6 @@
             color:#000;
             padding:50px;
             line-height:30px;
-            background-color: #cfd4d3;
            
         }      
         #clock {  
@@ -115,7 +114,7 @@
                 <br>
             </div>
             <div >
-                <table border="0" cellpadding="0" cellspacing="0" class="main" style="width:100%;background-color: #cfd4d3;"> 
+                <table border="0" cellpadding="0" cellspacing="0" class="main" style="width:100%"> 
                     <tr> 
                         <td > 
                             <div class="leftmenu" style="width:100%"> 

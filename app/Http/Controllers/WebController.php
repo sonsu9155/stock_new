@@ -45,6 +45,49 @@ class WebController extends Controller
         return view('web.operate')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
         
     }
+    public function order(){
+        $user = Auth::user();
+        $money_wallet = MoneyWallet::where('id', $user->money_wallet_id)->first();
+        $stock_wallet = StockWallet::where('id', $user->stock_wallet_id)->first();
+        $funds = FundRequest::where('user_id',$user->id)
+                ->where('type','出金')->get();
+        if($funds){
+        $fund_amount = $funds->sum('money');           
+        }  
+      
+        $new_latest = News::latest()->first();
+        return view('web.order')->with(compact('user','money_wallet','stock_wallet','fund_amount', 'new_latest'));
+        
+    }
+
+    public function getstock(){
+        // $this->buyhistory_init();
+         $stockcode = $_GET['stockcode']; 
+         return $stockdata= $this->getstockPrice($stockcode);
+     }
+     
+    public function getstockPrice($stockcode){
+        if(substr($stockcode,0,1)=='6'){
+            $sh_url = "http://hq.sinajs.cn/list=sh".$stockcode;
+        }else{
+            $sh_url = "http://hq.sinajs.cn/list=sz".$stockcode;
+        }       
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $sh_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        
+        $data = curl_exec($ch);
+        //var_dump($data);exit();
+        curl_close($ch);        
+        $realdata = mb_substr($data, 21, strlen($data)-24);
+        $realdata_arr = explode (",", $realdata);
+        $utf8Str = mb_convert_encoding($realdata , 'UTF-8' , 'GBK');
+        //$realdata = utf8_decode($realdata);
+        //var_dump($utf8Str);exit();
+        return $utf8Str;
+
+    }
 
     public function stock_detail(){
         $user = Auth::user();

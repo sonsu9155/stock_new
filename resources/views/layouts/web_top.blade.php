@@ -31,7 +31,7 @@
 			</td>
 		</tr>
 	</table>
-	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="top" style="background-color: #9d1618;"> 
+	<table width="100%" border="0" cellpadding="0" cellspacing="0" class="top" > 
 		<tr>
 			<td width="280px" style='margin-right: 100px;'><img src="/images/stock_web_logo.png" style='width: 280px; margin-left: 20px;margin-right: 100px;'/></td>
             <td >
@@ -47,7 +47,7 @@
                             <a href="javascript:void(0);" target="_self" onclick="if(confirm('下载应用程序并尝试.')){location.href='/dow/index';return false;}else{return false;}"><img src="/images/3.png" /><br>自选股票</a>
                         </td>
                         <td align="center">
-                            <a href="javascript:void(0);" target="_self" onclick="if(confirm('下载应用程序并尝试.')){location.href='/dow/index';return false;}else{return false;}"><img src="/images/4.png" /><br>快速下单</a>
+                        <a href="/web/order" target="_self" ><img src="/images/4.png" /><br>快速下单</a>
                         </td>
                         <td align="center">
                             <a href="/web/deal" target="_self" ><img src="/images/7.png" /><br>持仓单</a>

@@ -1,24 +1,38 @@
 html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li, dt, dd, p, blockquote, pre, form, fieldset, table, th, td { margin: 0px; padding: 0px; font-size:12px; }
 ul,ol,li {list-style:none;}
-body{ font-size: 12px; text-decoration: none; font-family:Arial, Helvetica, sans-serif; background:#EFEFEF;}
+body{ font-size: 12px; text-decoration: none;
+
+ /* font-family:Arial, Helvetica, sans-serif;  */
+ 
+ font-family:microsoft jhenghei;
+ 
+ 
+ background:#3f4042;}
 a { color: #69B2F3; text-decoration: none;}
 a:hover {color:#FF0000; text-decoration:none;}
 input { vertical-align:middle;}
 select { vertical-align:middle;}
-.button2 { padding:0px 2px; margin:0px; height:22px; line-height:20px; background:url(/images/btn_bg.gif) repeat-x; border:1px solid #2883B2; cursor:pointer; letter-spacing:1px; font-weight:bold; color:#555555; }
-.button3 {background:url(/images/btn_bg.jpg) repeat-x; width:auto; height:24px; line-height:20px; _line-height:20px; border:1px solid #A1A1A1; text-align:center; cursor:pointer;}
+.button2 { padding:0px 2px; margin:0px; height:22px; line-height:20px; background:url(../images/btn_bg.gif) repeat-x; border:1px solid #2883B2; cursor:pointer; letter-spacing:1px; font-weight:bold; color:#555555; }
+.button3 {background:url(../images/btn_bg.jpg) repeat-x; width:auto; height:24px; line-height:20px; _line-height:20px; border:1px solid #A1A1A1; text-align:center; cursor:pointer;}
 .top { 
-  /* background:url(/images/bg_top.jpg); */
-  color:#fff;
-  border-bottom:1px solid #000;}
-.top a.btn { display:inline-block; background:url(/images/btn_bg.jpg) repeat-x; height:18px; line-height:20px; _line-height:20px; border:1px solid #A1A1A1; text-align:center; margin:0px 3px; padding:2px 5px; _padding:1px 5px; color:#000000;}
+
+background:url(../images/bg_top.jpg); 
+
+
+
+height:114px;
+
+/* background-color:#3f4042; */
+
+}
+.top a.btn { display:inline-block; background:url(../images/btn_bg.jpg) repeat-x; height:18px; line-height:20px; _line-height:20px; border:1px solid #A1A1A1; text-align:center; margin:0px 3px; padding:2px 5px; _padding:1px 5px; color:#000000;}
 .top a.btn:hover {border:1px solid #FFFF00; color:#ff0000;}
 #all_count {color:#B1B1B1;}
 #news { height: 25px; line-height:25px; overflow:hidden;color: #000000;}
 #news li {
 	color: #0000FF;
 	text-decoration: none;
-	background:url(/images/amr_ico.gif) 0px 7px no-repeat;
+	background:url(../images/amr_ico.gif) 0px 7px no-repeat;
 	padding-left:25px;
 }
 #news ul,li{margin:0;padding:0}
@@ -26,11 +40,31 @@ select { vertical-align:middle;}
 
 #stock_main {
 	background-color: #ffffff;
-	border-bottom:1px solid #CCCCCC;
+	/* border-bottom:1px solid #CCCCCC; */
 }
 
-.leftmenu {width:155px;  overflow:hidden; }
-.leftmenu h5 {display:block; clear:both; height:25px; background:url(/images/nbg.gif) no-repeat; line-height:25px; padding-left:50px; margin-top:5px; color:#fff;}
+.leftmenu {width:170px; 
+
+background:#3f4042;
+
+ overflow:hidden;}
+
+
+.leftmenu h5 {display:block; clear:both; height:32px;
+
+font-size:14px;
+
+  background:url(../images/nbg.gif) no-repeat;
+ 
+ /*background:url(../images/bg_nav.jpg); */
+ 
+  /*background-color:#0B3663;*/
+
+
+ line-height:25px; padding-left:50px; margin-top:5px; color:#c3d7eb;}
+
+
+
 .leftmenu h5 a {color:#fff; text-decoration:none;}
 .leftmenu h5 a:hover {text-decoration:underline;}
 .leftmenu h5 span {margin-left:15px;}
@@ -38,9 +72,19 @@ select { vertical-align:middle;}
 .leftmenu h5 span a:hover {color:#ffffff; text-decoration:none;}
 .leftmenu ul {padding-top:3px;}
 .leftmenu ul li {padding:0px;}
-.leftmenu ul li a {height:24px; width:155px; line-height:24px;  display:block; color:#000000; padding-left:50px;}
-.leftmenu ul li a:hover {  display:block;}
-.leftmenu ul li a.on {  display:block;}
+.leftmenu ul li a {height:24px; width:155px; line-height:24px; 
+/* background:url(../images/menu_normal.gif) no-repeat; */
+/* background-color:#152950; */
+ display:block; color:#e0e9f2; padding-left:50px;}
+ 
+.leftmenu ul li a:hover { 
+background-color:#0B3663;
+/* background:url(../images/menu_hover.gif) no-repeat;  */
+
+display:block;}
+
+
+.leftmenu ul li a.on { background:url(../images/menu_hover.gif) no-repeat; display:block;}
 .error {
 	left: 10px;
 	color: #FF0000;
@@ -55,19 +99,19 @@ select { vertical-align:middle;}
 	line-height: -10px;
 	text-decoration: blink;
 }
-.datepicker {width:90px; height:18px; line-height:18px; background:url(/images/datePicker.gif) right center no-repeat; background-color:#ffffff; border:1px solid #7F9DB9;}
+.datepicker {width:90px; height:18px; line-height:18px; background:url(../images/datePicker.gif) right center no-repeat; background-color:#ffffff; border:1px solid #7F9DB9;}
 .mybox {margin-top:5px; word-break:break-all;}
 .mybox a {color:#1287E8; text-decoration:underline; font-family:Arial, Helvetica, sans-serif}
 .mybox a:hover {color:#ff0000; text-decoration:none;}
 .mybox td {padding:3px; line-height:23px; word-break:break-all;}
-.mybox th {height:30px;  background:url(/images/nav_bg.png) repeat; padding:0px; font-size:14px; letter-spacing:5px; color:#FFFFFF;}
+.mybox th {height:30px; line-height:30px; background:url(../images/nav_bg.gif) repeat-x; padding:0px; font-size:14px; color:#fff; letter-spacing:5px;}
 .mybox p {line-height:20px; margin-bottom:14px;}
 /*.mybox input {float:left; height:20px; line-height:20px;}*/
 .button_small {padding:0px; margin:0px; line-height:20px; height:25px; }
 .input_small { height:18px; line-height:18px; padding:0px; border:1px solid #7F9DB9; color:#555555; font-size:12px;}
-.mybox .money {color:#ff0000; font-size:18px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;  }
+.mybox .money {color:#ff0000; font-size:18px; font-weight:bold; font-family:Arial, Helvetica, sans-serif; float:left;}
 .mybox .money1 {color:#ff0000; font-size:14px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;}
-.mybox .tips {width:20px; height:20px; overflow:hidden; display:block; float:left; background:url(/images/ico_question.gif) 2px 3px no-repeat; cursor:pointer; margin-left:10px;}
+.mybox .tips {width:20px; height:20px; overflow:hidden; display:block; float:left; background:url(../images/ico_question.gif) 2px 3px no-repeat; cursor:pointer; margin-left:10px;}
 .mybox .gray {color:gray;}
 .mybox .message_data {font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold;}
 
@@ -220,7 +264,7 @@ BORDER-RIGHT: #929292 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #929292 1px sol
 .table1 td p {line-height:20px; margin:0px;}
 .table1 {border:1px solid #BECDD8; margin:3px auto; background:#ffffff; font-size:12px;}
 .table1 td {padding:3px; height:20px; line-height:20px;}
-.table1 .row_title { height:25px; line-height:25px; background:url(/images/title_bg.jpg) repeat-x; font-weight:bold; padding-left:5px;}
+.table1 .row_title { height:25px; line-height:25px; background:url(../images/title_bg.jpg) repeat-x; font-weight:bold; padding-left:5px;}
 .table1 .row_ls {background:#FBFBFC;}
 .table1 .row1_old {background:#FBFBFC;}
 .table1 .row1_even {background:#E5EFF7;}
@@ -228,6 +272,6 @@ BORDER-RIGHT: #929292 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #929292 1px sol
 .table1 td span {cursor:pointer;}
 .table1 a {color:#6390B6; text-decoration:underline;}
 .table1 a:hover {color:#ff0000; text-decoration:none;}
-.table1 .tips {background:url(/images/tips.gif) left center no-repeat; padding-left:20px; color:gray;}
+.table1 .tips {background:url(../images/tips.gif) left center no-repeat; padding-left:20px; color:gray;}
 .table1 .gray {color:gray;
 }
