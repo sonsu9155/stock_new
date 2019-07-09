@@ -7,6 +7,11 @@
 <script type="text/javascript">
 	var IsOpen = 1;
 	$(document).ready(function() {
+		$.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 		//股票查询事件
 		var suggestServer = new SuggestServer();
 		suggestServer.bind({
@@ -20,7 +25,7 @@
 			"fix": { "ie6" : [0, - 1], "ie7" : [0, - 1], "firefox" : [1, 1]},
 			"callback": null
 		});
-		var initStockCode='0';
+		var initStockCode='000001';
 		if(IsOpen==0) //休市
 		{
 			$('#buybox').attr('disabled','true');
@@ -33,7 +38,7 @@
 			getstockname();
 		}
 		
-		$("#orderfrm").submit(function(){
+		$("#btnOk").click(function(){
 			$('#btnOk').attr('disabled','true');
 			$('#btnCancel').attr('disabled','true');
 			var bull_code=$('#buy_code').val();
@@ -64,25 +69,7 @@
 				return false;
 			}
 			if(bull_num>0 && bull_code){
-				$.post("buy.php", {type:"bull", code:''+bull_code+'', buy_type: ''+buy_type+'',price_type:''+price_type+'',buy_type:''+buy_type+'',buy_num:''+bull_num+'',buys_price:''+bull_price+'' },
-				function(data){
-					res = data.split('|');
-					if(res[0]=='true')
-					{
-						if(res[1].indexOf('当日委托查询')!=-1)
-						{
-							ymPrompt.succeedInfo({title:'下单成功',message:res[1],handler:function(){self.location.href='entrust_search.php?status=1';$('#btnOk').attr('disabled','');$('#btnCancel').attr('disabled','');}});
-						}
-						else
-						{
-							ymPrompt.succeedInfo({title:'下单成功',message:res[1],handler: function() { window.location.href="http://"+window.location.host+window.location.pathname+"?do=order&stockcode="+bull_code}});
-						}
-					}
-					else
-					{
-						ymPrompt.errorInfo({title:'下单失败',message:res[1],handler:function(){$('#btnOk').attr('disabled','');$('#btnCancel').attr('disabled','');}});
-					}
-				});
+				submitok();
 			}
 			return false;
 		});
@@ -171,7 +158,7 @@
 						$('#btnOk').removeAttr("disabled"); 
 						$('#btnCancel').removeAttr("disabled"); 
 						stock = res.split(',');
-
+						//alert(stock[3]);
 						$('#buy_name').html(stock[2]);
 						$('#buy_dc').html(stock[9]+' ‰');
 						if(stock[3]=='1' || stock[4]=='1') //停牌或关盘
@@ -207,12 +194,82 @@
 							//显示行情K线图
 							ShowStocksPic();
 							//获取行情数据
-							GetQuote(stock[0],stock[1]);
+							alert('test');
+							GetQuote(code);
 						}
 					}
+					
 				}
 			});
 		}
+	}
+	function GetQuote(c)
+	{
+		$.ajax({
+		type: 'GET',
+		url: "/web/getstock?stockcode=" + c,
+		success:function(res)
+		{
+			//alert(res);
+			if(res.indexOf(',')!=-1)
+			{
+			
+			quote = res.split(',');
+			
+			if(quote.length!=33)
+			{
+			}
+			zt_rate = quote[1].toLowerCase().indexOf('st')!=-1 ? 1.05 : 1.1;
+			dt_rate = quote[1].toLowerCase().indexOf('st')!=-1 ? 0.95 : 0.9;
+			var cancash = parseFloat($('#spn_cancash').val());
+			console.log(cancash);
+			var cannum = Math.floor(cancash / (100*parseFloat(quote[3])));
+			
+			$('#canbuy').val(cannum);
+			$('#buys_price').val(parseFloat(quote[3]).toFixed(2));
+			$('#buy_price').html(parseFloat(quote[3]).toFixed(2));
+			
+			$('#buys_price').val(quote[3]);
+			$('#cur_price').html('<font color="' + (parseFloat(quote[4])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + parseFloat(quote[4]).toFixed(2) + '</font>');
+			$('#kp_price').html('<font color="' + (parseFloat(quote[2])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + parseFloat(quote[2]).toFixed(2) + '</font>');
+			$('#hight_price').html('<font color="' + (parseFloat(quote[5])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + parseFloat(quote[5]).toFixed(2) + '</font>');
+			$('#lower_price').html('<font color="' + (parseFloat(quote[6])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + parseFloat(quote[6]).toFixed(2) + '</font>');
+			$('#yes_price').html(parseFloat(quote[3]).toFixed(2));
+			cur_zd = parseFloat(quote[4]-quote[3]);
+			cur_zdf = parseFloat(cur_zd*100 / quote[3]);
+			cur_zd = '<font color="' + (cur_zd>0 ? '#ff0000' : '#287938') + '">' + cur_zd + '</font>';
+			cur_zdf = '' + cur_zdf + '';
+			$('#zd').html(cur_zd);
+			$('#zdf').html(cur_zdf);
+			$('#zcj_num').html(Math.floor(quote[9]/100));
+			$('#zcj_price').html(parseFloat(quote[10]/10000));
+			$('#zt_price').html('<font color="#ff0000">' + parseFloat(quote[3]*zt_rate).toFixed(2) + '</font>');
+			$('#dt_price').html('<font color="#287938">' + parseFloat(quote[3]*dt_rate).toFixed(2) + '</font>');
+			
+			$('#sell_5_price').html('<font color="' + (parseFloat(quote[29])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[29] + '</font>');
+			$('#sell_5_num').html(Math.floor(quote[28]/100));
+			$('#sell_4_price').html('<font color="' + (parseFloat(quote[27])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[27] + '</font>');
+			$('#sell_4_num').html(Math.floor(quote[26]/100));
+			$('#sell_3_price').html('<font color="' + (parseFloat(quote[25])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[25] + '</font>');
+			$('#sell_3_num').html(Math.floor(quote[24]/100));
+			$('#sell_2_price').html('<font color="' + (parseFloat(quote[23])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[23] + '</font>');
+			$('#sell_2_num').html(Math.floor(quote[22]/100));
+			$('#sell_1_price').html('<font color="' + (parseFloat(quote[21])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[21] + '</font>');
+			$('#sell_1_num').html(Math.floor(quote[20]/100));
+			
+			$('#buy_1_num').html(Math.floor(quote[10]/100));
+			$('#buy_1_price').html('<font color="' + (parseFloat(quote[11])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[11] + '</font>');
+			$('#buy_2_num').html(Math.floor(quote[12]/100));
+			$('#buy_2_price').html('<font color="' + (parseFloat(quote[13])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[13] + '</font>');
+			$('#buy_3_num').html(Math.floor(quote[14]/100));
+			$('#buy_3_price').html('<font color="' + (parseFloat(quote[15])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[15] + '</font>');
+			$('#buy_4_num').html(Math.floor(quote[16]/100));
+			$('#buy_4_price').html('<font color="' + (parseFloat(quote[17])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[17] + '</font>');
+			$('#buy_5_num').html(Math.floor(quote[18]/100));
+			$('#buy_5_price').html('<font color="' + (parseFloat(quote[19])>parseFloat(quote[3]) ? '#ff0000' : '#287938') + '">' + quote[19] + '</font>');
+			}
+		}
+		});
 	}
 </script>
 
@@ -230,7 +287,8 @@
 @endsection
 @section('content')
 <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0"> 
-	<form name="orderfrm" id="orderfrm" action="" method="post">
+	<form name="orderfrm" id="orderfrm" action="/web/buy" method="post">
+	{{ csrf_field() }}
 	<tr> 
 		<td width="230"  class="xd" valign="top">
 		<table width="230" border="0" cellpadding="3" cellspacing="1" class="mybox table-bordered" id="buybox"> 
@@ -300,7 +358,7 @@
 			</tr> 
 			<tr bgcolor="#3f4042"> 
 			<td colspan="2" align="center"> 
-				<input type="button" name="btnOk" id="btnOk" value="确定" class="button3" onclick='submitok()' />&nbsp;&nbsp; 
+				<input type="button" name="btnOk" id="btnOk" value="确定" class="button3"  />&nbsp;&nbsp; 
 				<input type="button" name="btnCancel" id="btnCancel" value="取消" onclick="Cancel();" class="button3" /> 
 			</td> 
 			</tr> 
@@ -317,7 +375,11 @@
 							<th width="20%" class="title_TD" style="text-align:center" >价格</th>
 							<th width="20%" class="title_TD" style="text-align:center" >数量</th>
 							<th width="20%" class="title_TD">&nbsp;</th>
-							<th  class="title_TD" style="text-align:center"><a href="javascript:getstockname();"><img src="/images/btn_refresh.gif" border="0" alt="刷新行情" /></a></th>
+							<th  class="title_TD" style="text-align:center">
+								<a href="javascript:getstockname();">
+									<img src="/images/btn_refresh.gif" border="0" alt="刷新行情" />
+								</a>
+							</th>
 							</tr>
 							<tr align="center" bgcolor="#3f4042">
 							<td>卖五</td>
